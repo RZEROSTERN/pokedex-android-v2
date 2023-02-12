@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import mx.dev1.pokedex.ui.presentation.composables.Navigation
 import mx.dev1.pokedex.ui.theme.Red500
 
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Surface(
-                color = Red500,
+                color = Color.White,
                 modifier = Modifier.fillMaxSize()) {
                 Navigation()
             }
