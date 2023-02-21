@@ -11,11 +11,5 @@ import mx.dev1.pokedex.ui.presentation.screens.SplashScreen
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(
-        navController = navController,
-        startDestination = "splash_screen") {
 
-        composable("splash_screen") { SplashScreen(navController = navController) }
-        composable("main_screen") { PokemonSearchScreen(navController = navController) }
-    }
 }

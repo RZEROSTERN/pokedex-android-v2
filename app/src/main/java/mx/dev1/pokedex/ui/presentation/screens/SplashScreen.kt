@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 import mx.dev1.pokedex.R
+import mx.dev1.pokedex.ui.presentation.composables.DrawerScreens
 import mx.dev1.pokedex.ui.theme.Red500
 
 @Composable
@@ -37,7 +38,7 @@ fun SplashScreen(navController: NavController?) {
             )
         )
         delay(3000L)
-        navController?.navigate("main_screen")
+        navController?.navigate(DrawerScreens.PokemonSearch.route)
     }
 
     Box(
