@@ -41,10 +41,10 @@ fun Drawer(
 
         screens.forEach { screen ->
             if(screen.route != "splash_screen") {
-                Spacer(Modifier.height(24.dp))
+                Spacer(Modifier.height(16.dp))
                 Text(
                     text = screen.title,
-                    style = MaterialTheme.typography.h4,
+                    style = MaterialTheme.typography.subtitle1,
                     modifier = Modifier.clickable {
                         onDestinationClicked(screen.route)
                     }
