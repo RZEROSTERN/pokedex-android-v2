@@ -14,14 +14,10 @@ import mx.dev1.pokedex.ui.presentation.composables.TopBar
 import mx.dev1.pokedex.ui.theme.PokedexTheme
 
 @Composable
-fun PokemonSearchScreen(openDrawer: () -> Unit) {
-    TopBar(
-        title = "Pokedex",
-        buttonIcon = Icons.Filled.Menu,
-        onButtonClicked = { openDrawer() }
-    )
-
+fun PokemonSearchScreen() {
     Box(
         modifier = Modifier.fillMaxSize()
-    )
+    ) {
+        Text(text = "Pokemon search")
+    }
 }

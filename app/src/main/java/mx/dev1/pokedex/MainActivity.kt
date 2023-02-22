@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import mx.dev1.pokedex.ui.presentation.composables.Navigation
 import mx.dev1.pokedex.ui.presentation.screens.AppMainScreen
 import mx.dev1.pokedex.ui.theme.PokedexTheme
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PokedexTheme {
-                AppMainScreen()
+                AppMainScreen(rememberNavController())
             }
         }
     }
@@ -29,6 +30,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     PokedexTheme {
-        AppMainScreen()
+        AppMainScreen(null)
     }
 }
