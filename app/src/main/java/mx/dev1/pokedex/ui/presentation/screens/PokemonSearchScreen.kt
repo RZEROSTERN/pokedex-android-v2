@@ -19,5 +19,6 @@ fun PokemonSearchScreen() {
         modifier = Modifier.fillMaxSize()
     ) {
         Text(text = "Pokemon search")
+        Text(text = "Pokemon search 2")
     }
 }
