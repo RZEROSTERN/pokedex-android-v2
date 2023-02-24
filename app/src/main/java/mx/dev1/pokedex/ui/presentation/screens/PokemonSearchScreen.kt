@@ -23,7 +23,7 @@ fun PokemonSearchScreen() {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 100.dp)
     ) {
-        items(10) {
+        items(150) {
             PokemonItem()
         }
     }
