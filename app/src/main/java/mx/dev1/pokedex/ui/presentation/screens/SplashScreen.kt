@@ -47,7 +47,7 @@ fun SplashScreen(navController: NavController?) {
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_poke_ball_icon),
-            contentDescription = "Logo",
+            contentDescription = "Pokemon",
             modifier = Modifier.scale(scale.value))
     }
 }
