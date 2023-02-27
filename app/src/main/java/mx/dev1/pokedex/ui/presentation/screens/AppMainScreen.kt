@@ -1,6 +1,7 @@
 package mx.dev1.pokedex.ui.presentation.screens
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import kotlinx.coroutines.launch
 import mx.dev1.pokedex.R
 import mx.dev1.pokedex.ui.presentation.composables.DrawerScreens
@@ -35,23 +38,31 @@ import mx.dev1.pokedex.ui.theme.PokedexTheme
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AppMainScreen(
-    navController: NavHostController?
+    navController: NavHostController
 ) {
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    var showTopBar = false
+
+    navBackStackEntry?.destination?.route?.let {
+        showTopBar = it != "splash_screen"
+    }
 
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            TopBar(
-                title = "Pokedex",
-                buttonIcon = Icons.Filled.Menu,
-                onButtonClicked = {
-                    coroutineScope.launch {
-                        scaffoldState.drawerState.open()
+            if(showTopBar) {
+                TopBar(
+                    title = "Pokedex",
+                    buttonIcon = Icons.Filled.Menu,
+                    onButtonClicked = {
+                        coroutineScope.launch {
+                            scaffoldState.drawerState.open()
+                        }
                     }
-                }
-            )
+                )
+            }
         },
         drawerContent = {
             Column(
@@ -94,13 +105,5 @@ fun AppMainScreen(
                 composable(DrawerScreens.PokemonSearch.route) { PokemonSearchScreen() }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun AppMainScreen_Preview() {
-    PokedexTheme {
-        AppMainScreen(navController = null)
     }
 }
