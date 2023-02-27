@@ -1,7 +1,6 @@
 package mx.dev1.pokedex.ui.presentation.screens
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,13 +16,15 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -32,8 +33,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import kotlinx.coroutines.launch
 import mx.dev1.pokedex.R
 import mx.dev1.pokedex.ui.presentation.composables.DrawerScreens
+import mx.dev1.pokedex.ui.presentation.composables.SearchBar
 import mx.dev1.pokedex.ui.presentation.composables.TopBar
-import mx.dev1.pokedex.ui.theme.PokedexTheme
+import mx.dev1.pokedex.ui.presentation.helpers.SearchWidgetState
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -45,6 +47,9 @@ fun AppMainScreen(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     var showTopBar = false
 
+    var searchWidgetState by remember{ mutableStateOf(SearchWidgetState.CLOSED) }
+    var searchTextState by remember { mutableStateOf("") }
+
     navBackStackEntry?.destination?.route?.let {
         showTopBar = it != "splash_screen"
     }
@@ -53,15 +58,32 @@ fun AppMainScreen(
         scaffoldState = scaffoldState,
         topBar = {
             if(showTopBar) {
-                TopBar(
-                    title = "Pokedex",
-                    buttonIcon = Icons.Filled.Menu,
-                    onButtonClicked = {
+                if(searchWidgetState == SearchWidgetState.OPENED) {
+                    SearchBar(onCloseSearch = {
                         coroutineScope.launch {
-                            scaffoldState.drawerState.open()
+                            if (searchTextState.isNotEmpty() || searchTextState.isNotBlank()) {
+                                searchTextState = ""
+                            } else {
+                                searchWidgetState = SearchWidgetState.CLOSED
+                            }
                         }
-                    }
-                )
+                    })
+                } else {
+                    TopBar(
+                        title = "Pokedex",
+                        buttonIcon = Icons.Filled.Menu,
+                        onButtonClicked = {
+                            coroutineScope.launch {
+                                scaffoldState.drawerState.open()
+                            }
+                        },
+                        onButtonSearchClicked = {
+                            coroutineScope.launch {
+                                searchWidgetState = SearchWidgetState.OPENED
+                            }
+                        },
+                    )
+                }
             }
         },
         drawerContent = {
