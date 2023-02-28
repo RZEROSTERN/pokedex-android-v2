@@ -16,11 +16,13 @@ import mx.dev1.pokedex.ui.theme.PokedexTheme
 sealed class DrawerScreens(val title: String, val route: String) {
     object Splash : DrawerScreens("Splash", "splash_screen")
     object PokemonSearch : DrawerScreens("Pokemon", "main_screen")
+    object SinglePokemon : DrawerScreens( "Single Pokemon", "single_pokemon")
 }
 
 private val screens = listOf(
     DrawerScreens.Splash,
-    DrawerScreens.PokemonSearch
+    DrawerScreens.PokemonSearch,
+    DrawerScreens.SinglePokemon
 )
 
 @Composable

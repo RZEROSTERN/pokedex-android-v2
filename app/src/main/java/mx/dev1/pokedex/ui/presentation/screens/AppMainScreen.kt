@@ -124,7 +124,8 @@ fun AppMainScreen(
                 startDestination = DrawerScreens.Splash.route) {
 
                 composable(DrawerScreens.Splash.route) { SplashScreen(navController = navController) }
-                composable(DrawerScreens.PokemonSearch.route) { PokemonSearchScreen() }
+                composable(DrawerScreens.PokemonSearch.route) { PokemonSearchScreen(navController = navController) }
+                composable(DrawerScreens.SinglePokemon.route) { SinglePokemonScreen() }
             }
         }
     }
