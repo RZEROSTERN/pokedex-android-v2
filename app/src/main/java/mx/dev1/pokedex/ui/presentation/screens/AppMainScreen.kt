@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
@@ -93,6 +94,7 @@ fun AppMainScreen(
                     .padding(start = 8.dp, top = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+                Greeting(name = "world")
                 Box(
                     modifier = Modifier
                         .size(126.dp)
